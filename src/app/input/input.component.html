@@ -1,0 +1,36 @@
+<div class="field">
+  <label class="label">{{ label }}</label>
+  <div class="control">
+    <input
+      class="input"
+      [ngClass]="{ 'is-danger': isErrored() }"
+      type="text"
+      [formControl]="control"
+    >
+  </div>
+  <ng-container *ngIf="
+    control.touched &&
+    control.dirty &&
+    control.errors as nameErrors
+  ">
+    <div
+      *ngIf="nameErrors.required"
+      class="help is-danger"
+    >
+      Value is required.
+    </div>
+    <div
+      *ngIf="nameErrors.pattern"
+      class="help is-danger"
+    >
+      Invalid format.
+    </div>
+    <div
+      *ngIf="nameErrors.minlength"
+      class="help is-danger"
+    >
+      Value must be longer. Currently you have {{ nameErrors.minlength.actualLength }},
+      but have to have {{ nameErrors.minlength.requiredLength }}
+    </div>
+  </ng-container>
+</div>
